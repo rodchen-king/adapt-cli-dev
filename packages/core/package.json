@@ -1,6 +1,6 @@
 {
   "name": "@adapt-cli-dev/core",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "> TODO: description",
   "author": "rodchen <rodchen_king@outlook.com>",
   "homepage": "https://github.com/rodchen-king/adapt-cli-dev/tree/main/packages/core#readme",
@@ -24,7 +24,7 @@
     "url": "https://github.com/rodchen-king/adapt-cli-dev/issues"
   },
   "dependencies": {
-    "@adapt-cli-dev/core": "^0.0.1",
+    "@adapt-cli-dev/core": "^0.0.0",
     "adaptd": "^0.1.0"
   },
   "gitHead": "f81ab7dc069a37cac31258ef0d1f1cfc7328504c"
