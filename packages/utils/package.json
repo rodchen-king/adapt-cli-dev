@@ -1,6 +1,6 @@
 {
   "name": "@adapt-cli-dev/utils",
-  "version": "0.0.2",
+  "version": "0.0.0",
   "description": "> TODO: description",
   "author": "rodchen <rodchen_king@outlook.com>",
   "homepage": "https://github.com/rodchen-king/adapt-cli-dev/tree/main/packages/utils#readme",
@@ -26,5 +26,8 @@
   "dependencies": {
     "adaptd": "^0.1.0"
   },
-  "gitHead": "e4b03ebf7f282dbd45bc0ffa87810b3486099af3"
+  "gitHead": "ee38b50d8898bd214258f6a0dd644ee84907cccd",
+  "publishConfig": {
+    "access": "public"
+  }
 }
