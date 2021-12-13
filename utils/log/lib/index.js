@@ -6,7 +6,7 @@ const log = require('npmlog');
 
 log.level = process.env.LOG_LEVEL ? process.env.LOG_LEVEL : 'info';
 log.heading = 'adapt';
-log.headingStyle = {fg: 'red', bg: 'white'}
+log.headingStyle = {fg: 'grey', bg: 'white'}
 
 log.addLevel('verbose', 1000, {fg: 'blue', bg: 'black'}, 'verb')
 log.addLevel('info', 2000, {fg: 'green'})
