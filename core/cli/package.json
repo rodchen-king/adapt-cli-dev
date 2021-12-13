@@ -1,0 +1,36 @@
+{
+  "name": "@adapt-cli-dev/core",
+  "version": "0.0.1",
+  "description": "> TODO: description",
+  "author": "rodchen <rodchen_king@outlook.com>",
+  "homepage": "https://github.com/rodchen-king/adapt-cli-dev/tree/main/packages/core#readme",
+  "license": "ISC",
+  "main": "\\",
+  "bin": {
+    "adapt-cli-dev": "bin/index.js"
+  },
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rodchen-king/adapt-cli-dev.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/rodchen-king/adapt-cli-dev/issues"
+  },
+  "dependencies": {
+    "@adapt-cli-dev/utils": "file:../../utils/utils"
+  },
+  "gitHead": "ee38b50d8898bd214258f6a0dd644ee84907cccd",
+  "publishConfig": {
+    "access": "public"
+  }
+}
