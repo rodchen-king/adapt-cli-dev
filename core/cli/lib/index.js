@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: rodchen
  * @Date: 2021-12-05 14:28:02
- * @LastEditTime: 2021-12-13 20:27:32
+ * @LastEditTime: 2021-12-13 20:39:19
  * @LastEditors: rodchen
  */
 'use strict';
@@ -17,6 +17,8 @@ module.exports = core
 const smver = require('semver');
 const log = require('@adapt-cli-dev/log');
 const colors = require('colors/safe');
+const userHome = require('user-home');
+const pathExists = require('path-exists');
 
 const constant = require('./constant')
 const pkg = require('../package.json');
@@ -27,8 +29,15 @@ function core() {
         checkPkgVersion()
         checkNodeVersion()
         checkRoot()
+        checkUserHome()
     } catch(e) {
         log.error(e.message)
+    }
+}
+
+function checkUserHome() {
+    if (!userHome || !pathExists(userHome)) {
+        throw new Error(colors.red('当前用户主目录不存在'))
     }
 }
 
