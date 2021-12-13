@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: rodchen
  * @Date: 2021-12-05 14:28:02
- * @LastEditTime: 2021-12-13 21:09:25
+ * @LastEditTime: 2021-12-13 21:43:03
  * @LastEditors: rodchen
  */
 'use strict';
@@ -14,6 +14,7 @@ module.exports = core
 // json => JSON.parse
 // node => c++ Addon
 // any =》 默认通过js引擎解析
+const path = require('path')
 const smver = require('semver');
 const log = require('@adapt-cli-dev/log');
 const colors = require('colors/safe');
@@ -24,7 +25,7 @@ const minimist = require('minimist')
 const constant = require('./constant')
 const pkg = require('../package.json');
 
-let args;
+let args, config;
 
 function core() {
     try {
@@ -33,10 +34,39 @@ function core() {
         checkRoot()
         checkUserHome()
         checkInputArgs()
+        checkEnv()
         log.verbose('debug', 'test debug log')
     } catch(e) {
         log.error(e.message)
     }
+}
+
+function checkEnv() {
+    const dotenv = require('dotenv');
+    const dotenvPath = path.resolve(userHome, '.env');  // 配置环境变量
+    
+    if (pathExists(dotenvPath)) {
+        dotenv.config({
+            path: dotenvPath
+        });
+    }
+
+    config = createDefaultConfig();
+    log.verbose('环境变量', process.env.CLI_HOME)
+}
+
+function createDefaultConfig(){
+    const cliConfig = {
+        home: userHome
+    };
+
+    if (process.env.CLI_HOME) {
+        cliConfig['cliHome'] = path.join(userHome, process.env.CLI_HOME)
+    } else {
+        cliConfig['cliHome'] = path.join(userHome, constant.DEFAULT_CLI_HOME)
+    }
+
+    process.env.CLI_HOME = cliConfig.cliHome
 }
 
 function checkInputArgs() {
