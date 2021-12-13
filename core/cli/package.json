@@ -27,7 +27,9 @@
     "url": "https://github.com/rodchen-king/adapt-cli-dev/issues"
   },
   "dependencies": {
-    "@adapt-cli-dev/utils": "file:../../utils/utils"
+    "@adapt-cli-dev/utils": "file:../../utils/utils",
+    "import-local": "^3.0.3",
+    "npmlog": "^6.0.0"
   },
   "gitHead": "ee38b50d8898bd214258f6a0dd644ee84907cccd",
   "publishConfig": {

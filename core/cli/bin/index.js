@@ -1,6 +1,9 @@
 #!/usr/bin/env node
 
-const utils = require("@adapt-cli-dev/utils")
+const importLocal = require('import-local');
 
-utils()
-console.log('1')
+if (importLocal(__filename)) {
+  require('npmlog').info('cli', '正在使用本地版本');
+} else {
+  require('../lib')(process.argv.slice(2))
+}
