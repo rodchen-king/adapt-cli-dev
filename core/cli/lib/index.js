@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: rodchen
  * @Date: 2021-12-05 14:28:02
- * @LastEditTime: 2021-12-13 20:07:02
+ * @LastEditTime: 2021-12-13 20:27:32
  * @LastEditors: rodchen
  */
 'use strict';
@@ -26,9 +26,15 @@ function core() {
     try {
         checkPkgVersion()
         checkNodeVersion()
+        checkRoot()
     } catch(e) {
         log.error(e.message)
     }
+}
+
+function checkRoot() {
+    const rootCheck = require('root-check');
+    rootCheck();
 }
 
 function checkPkgVersion () {
