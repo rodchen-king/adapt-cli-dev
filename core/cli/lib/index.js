@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: rodchen
  * @Date: 2021-12-05 14:28:02
- * @LastEditTime: 2021-12-13 21:43:03
+ * @LastEditTime: 2021-12-14 16:13:08
  * @LastEditors: rodchen
  */
 'use strict';
@@ -24,10 +24,11 @@ const minimist = require('minimist')
 
 const constant = require('./constant')
 const pkg = require('../package.json');
+const { domainToASCII } = require('url');
 
 let args, config;
 
-function core() {
+async function core() {
     try {
         checkPkgVersion()
         checkNodeVersion()
@@ -35,10 +36,23 @@ function core() {
         checkUserHome()
         checkInputArgs()
         checkEnv()
+        await checkGlobalUpdate()
         log.verbose('debug', 'test debug log')
     } catch(e) {
         log.error(e.message)
     }
+}
+
+async function checkGlobalUpdate() {
+    // 获取当前版本号和模块名
+    const currentVersion = pkg.version;
+    const npmName = pkg.name;
+    // 调用npm api，获取所有版本号
+    const { getNpmInfo } = require("@adapt-cli-dev/get-npm-info");
+    const data = await getNpmInfo(npmName)
+    console.log(data)
+    // 提取所有的版本号，比对哪些版本号是大于当前版本号
+    // 获取最新的版本号，提示用户更新到最新的版本号
 }
 
 function checkEnv() {
