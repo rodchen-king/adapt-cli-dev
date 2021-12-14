@@ -2,7 +2,7 @@
  * @Description: 
  * @Author: rodchen
  * @Date: 2021-12-05 14:28:02
- * @LastEditTime: 2021-12-14 16:13:08
+ * @LastEditTime: 2021-12-14 16:50:03
  * @LastEditors: rodchen
  */
 'use strict';
@@ -15,7 +15,7 @@ module.exports = core
 // node => c++ Addon
 // any =》 默认通过js引擎解析
 const path = require('path')
-const smver = require('semver');
+const semver = require('semver');
 const log = require('@adapt-cli-dev/log');
 const colors = require('colors/safe');
 const userHome = require('user-home');
@@ -48,9 +48,13 @@ async function checkGlobalUpdate() {
     const currentVersion = pkg.version;
     const npmName = pkg.name;
     // 调用npm api，获取所有版本号
-    const { getNpmInfo } = require("@adapt-cli-dev/get-npm-info");
-    const data = await getNpmInfo(npmName)
-    console.log(data)
+    const { getNpmSemverVersion } = require("@adapt-cli-dev/get-npm-info");
+    const lastVersion = await getNpmSemverVersion(currentVersion, npmName)
+
+    if (lastVersion && semver.gt(lastVersion, currentVersion)) {
+        log.warn(colors.yellow(`请手动更新${npmName}，当前版本：${currentVersion}，最新版本：${lastVersion}
+        更新命令：npm install -g ${npmName}`))
+    }
     // 提取所有的版本号，比对哪些版本号是大于当前版本号
     // 获取最新的版本号，提示用户更新到最新的版本号
 }
@@ -85,7 +89,6 @@ function createDefaultConfig(){
 
 function checkInputArgs() {
     args = minimist(process.argv.slice(2));
-    console.log(args)
     checkArgs()
 }
 
@@ -118,7 +121,7 @@ function checkNodeVersion() {
     const lowestVersion = constant.LOWEST_NODE_VERSION;
     const currentVersion = process.version;
     
-    if (!smver.gte(currentVersion, lowestVersion)) {
+    if (!semver.gte(currentVersion, lowestVersion)) {
         throw new Error(colors.red(`adapt-cli 需要安装 ${currentVersion} 以上的版本 Node.js`))
     }
 
