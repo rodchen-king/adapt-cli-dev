@@ -2,7 +2,7 @@
  * @Description:
  * @Author: rodchen
  * @Date: 2021-12-05 14:28:02
- * @LastEditTime: 2021-12-17 16:13:27
+ * @LastEditTime: 2021-12-18 20:23:31
  * @LastEditors: rodchen
  */
 "use strict";
@@ -26,7 +26,6 @@ const minimist = require("minimist");
 const constant = require("./constant");
 const pkg = require("../package.json");
 const init = require('@adapt-cli-dev/init')
-const { domainToASCII } = require("url");
 
 let args, config;
 
@@ -34,15 +33,8 @@ let program = new commander.Command();
 
 async function core() {
   try {
-    checkPkgVersion();
-    checkNodeVersion();
-    checkRoot();
-    checkUserHome();
-    // checkInputArgs();
-    checkEnv();
-    await checkGlobalUpdate();
+    await prepare()
     registerCommand();
-    log.verbose("debug", "test debug log");
   } catch (e) {
     log.error(e.message);
   }
@@ -54,6 +46,8 @@ function registerCommand() {
     .usage('<command> [options]')
     .version(pkg.version)
     .option('-d, --debug', '是否开启调试模式', false)
+    .option('-tp, --targetPath <targetPath>', '是否执行本地调试文件路径', '')
+
 
   program
     .command('init [projectName]')
@@ -71,6 +65,11 @@ function registerCommand() {
     log.level = process.env.LOG_LEVEL 
   })
 
+  // 指定监控targetPat
+  program.on('option:targetPath', function(args) {
+    process.env.CLI_TARGET_PATH = program.targetPath
+  })
+
   // 高级定制3: 未知命令监听
   program.on('command:*', function(obj) {
     console.log(colors.red('未知的命令: ' + obj[0]))
@@ -86,6 +85,16 @@ function registerCommand() {
   }
 
   console.log()
+}
+
+async function prepare() {
+  checkPkgVersion();
+  checkNodeVersion();
+  checkRoot();
+  checkUserHome();
+  // checkInputArgs();
+  checkEnv();
+  await checkGlobalUpdate();
 }
 
 async function checkGlobalUpdate() {
@@ -117,7 +126,6 @@ function checkEnv() {
   }
 
   config = createDefaultConfig();
-  log.verbose("环境变量", process.env.CLI_HOME);
 }
 
 function createDefaultConfig() {
