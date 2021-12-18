@@ -2,7 +2,7 @@
  * @Description:
  * @Author: rodchen
  * @Date: 2021-12-05 14:28:02
- * @LastEditTime: 2021-12-18 20:23:31
+ * @LastEditTime: 2021-12-18 20:37:43
  * @LastEditors: rodchen
  */
 "use strict";
@@ -26,6 +26,7 @@ const minimist = require("minimist");
 const constant = require("./constant");
 const pkg = require("../package.json");
 const init = require('@adapt-cli-dev/init')
+const exec = require('@adapt-cli-dev/exec')
 
 let args, config;
 
@@ -52,7 +53,7 @@ function registerCommand() {
   program
     .command('init [projectName]')
     .option('-f, --force', '是否强制初始化')
-    .action(init)
+    .action(exec)
 
 
   // 监控debug模式

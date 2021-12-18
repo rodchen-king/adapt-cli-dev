@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "@adapt-cli-dev/get-npm-info": "file:../../utils/get-npm-info",
+    "@adapt-cli-dev/exec": "file:../exec",
     "@adapt-cli-dev/log": "file:../../utils/log",
     "@adapt-cli-dev/init": "file:../../commands/init",
     "colors": "^1.4.0",
