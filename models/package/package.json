@@ -1,9 +1,9 @@
 {
-  "name": "@adapt-cli-dev/exec",
+  "name": "@adapt-cli-dev/package",
   "version": "0.0.2",
   "description": "> TODO: description",
   "author": "rodchen <rodchen_king@outlook.com>",
-  "homepage": "https://github.com/rodchen-king/adapt-cli-dev/tree/main/core/exec#readme",
+  "homepage": "https://github.com/rodchen-king/adapt-cli-dev/tree/main/models/package#readme",
   "license": "ISC",
   "main": "lib/index.js",
   "directories": {
@@ -27,6 +27,8 @@
     "url": "https://github.com/rodchen-king/adapt-cli-dev/issues"
   },
   "dependencies": {
-    "@adapt-cli-dev/pakage": "file:../../models/package"
+    "@adapt-cli-dev/utils": "file:../../utils/utils",
+    "@adapt-cli-dev/format-path": "file:../../utils/format-path"
+
   }
 }
